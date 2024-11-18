@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link rel="stylesheet" href="/css/details page.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Finger+Paint&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Finger+Paint&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <button class="cart button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="5em" height="5em" viewBox="0 0 24 24" class="icon">
+                    <path fill="white"
+                        d="M7 22q-.825 0-1.412-.587T5 20t.588-1.412T7 18t1.413.588T9 20t-.587 1.413T7 22m10 0q-.825 0-1.412-.587T15 20t.588-1.412T17 18t1.413.588T19 20t-.587 1.413T17 22M6.15 6l2.4 5h7l2.75-5zM5.2 4h16.5l-4.975 9H8.1L7 15h12v2H3.625L6.6 11.6L3 4H1V2h3.25zm3.35 7h7z" />
+                </svg>
+
+                <span class="notification-badge">
+                    0
+                </span>
+            </button>
+
+            <h1>
+                <%= details.title %>
+            </h1>
+
+            <div class="empty"></div>
+        </div>
+
+        <main>
+            <section class="picture-container">
+                <div class="img-box">
+                    <img src="<%= details.product_image_path %>" alt="<%= details.product_name %>">
+                </div>
+            </section>
+
+            <div class="add-cart-section">
+                <form action="/add-item/<%= details.id %>" method="post">
+                    <button type="button" class="add button" onclick="cartNotification(event, this)"
+                        data-product-id="<%= details.id %>">
+                        Add to Cart
+                    </button>
+                </form>
+
+                <div class="quantity">
+                    <span class="minus">-</span>
+                    <span>0</span>
+                    <span class="plus">+</span>
+                </div>
+            </div>
+
+            <ul class="text-box">
+                <div class="description">
+                    <h2>Description:</h2>
+                    <li>
+                        <%= details.description %>
+                    </li>
+                </div>
+
+                <div class="features">
+                    <h2>Key Features:</h2>
+                    <li>
+                        <%= details.key_features %>
+                    </li>
+                </div>
+
+                <div class="benefits">
+                    <h2>Benefits:</h2>
+                    <li>
+                        <%= details.benefits %>
+                    </li>
+                </div>
+
+                <div class="instructions">
+                    <h2>Care Instructions:</h2>
+                    <li>
+                        <%= details.care_instructions %>
+                    </li>
+                </div>
+            </ul>
+        </main>
+    </header>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/js/script.js"></script>
+</body>
+
+</html>

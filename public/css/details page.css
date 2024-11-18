@@ -1,0 +1,149 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --content: font-family: "Roboto", serif;
+    --primaryColor: #5F5C7A;
+    --secondaryColor: #484750;
+    --acentColor: #543EFA;
+    --itemTouch: #262533;
+    --detailCaption: "Roboto Slab", serif;
+}
+
+body {
+    background-color: var(--primaryColor);
+    font-family: var(--captionText);
+}
+
+.header-container {
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+    align-items: center;
+    margin: 50px auto;
+    color: white;
+    font-family: var(--content);
+    font-weight: bold;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+.picture-container {
+    display: flex;
+    background-color: var(--itemTouch);
+    justify-content: center;
+    height: 500px;
+}
+
+.img-box {
+    height: 100%;
+}
+
+.img-box>img {
+    display: block;
+    height: 100%;
+}
+
+.add-cart-section {
+    width: 90%;
+    margin: 20px auto;
+    display: flex;
+    gap: 50px;
+}
+
+.button {
+    background: none;
+    border: none;
+}
+
+.add {
+    background-color: var(--acentColor);
+    color: white;
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    font-family: var(--detailCaption);
+    border-radius: 10px;
+    transition: 0.3s ease;
+
+}
+
+.add:hover {
+    background-color: #120d34;
+}
+
+.quantity {
+    background-color: var(--secondaryColor);
+    color: white;
+    padding: 5px 10px;
+    font-size: 1.2rem;
+    font-family: var(--detailCaption);
+    border-radius: 10px;
+    transition: 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+    font-weight: bold;
+}
+
+.quantity>* {
+    font-size: 2rem;
+}
+
+.minus,
+.plus {
+    cursor: pointer;
+}
+
+.minus:active,
+.plus:active {
+    color: var(--itemTouch);
+}
+
+.text-box {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    width: 90%;
+    margin: 20px auto;
+}
+
+.text-box>* {
+    margin-bottom: 25px;
+    color: white;
+    font-family: var(--detailCaption);
+    font-weight: 400;
+    letter-spacing: 1.5px;
+}
+
+.icon {
+    transition: fill 0.3s ease;
+}
+
+.icon:hover path {
+    fill: var(--itemTouch);
+}
+
+.cart {
+    position: relative;
+}
+
+.notification-badge {
+    display: none;
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    background-color: var(--acentColor);
+    color: white;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+}

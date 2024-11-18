@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Listing</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Finger+Paint&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="top-container">
+            <button class="cart button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="5em" height="5em" viewBox="0 0 24 24" class="icon">
+                    <path fill="white"
+                        d="M7 22q-.825 0-1.412-.587T5 20t.588-1.412T7 18t1.413.588T9 20t-.587 1.413T7 22m10 0q-.825 0-1.412-.587T15 20t.588-1.412T17 18t1.413.588T19 20t-.587 1.413T17 22M6.15 6l2.4 5h7l2.75-5zM5.2 4h16.5l-4.975 9H8.1L7 15h12v2H3.625L6.6 11.6L3 4H1V2h3.25zm3.35 7h7z" />
+                </svg>
+
+                <span class="notification-badge">
+                    2
+                </span>
+            </button>
+            <div class="search-bar">
+                <button class="search button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
+                        <path fill="white"
+                            d="M15.25 0a8.25 8.25 0 0 0-6.18 13.72L1 22.88l1.12 1l8.05-9.12A8.251 8.251 0 1 0 15.25.01zm0 15a6.75 6.75 0 1 1 0-13.5a6.75 6.75 0 0 1 0 13.5" />
+                    </svg>
+                </button>
+                <input type="text" class="search-input" placeholder="Search">
+            </div>
+
+            <div class="empty"></div>
+        </div>
+    </header>
+
+    <main>
+        <div class="main-item-container">
+            <ul class="product-container">
+                <% products.forEach(product=> { %>
+                    <li>
+                        <div class="img-box">
+                            <img src="<%= product.product_image_path %>" alt="<%= product.product_name %>">
+
+                            <form action="/product-details/<%= product.id %>" class="overlay" method="get">
+                                <button type="submit" class="view button">View Item</button>
+                            </form>
+
+                        </div>
+
+                        <p>
+                            <%= product.product_name %>
+                        </p>
+
+                        <span class="price-tag">
+                            <%= product.price %>
+                        </span>
+                    </li>
+                    <% }); %>
+            </ul>
+
+        </div>
+    </main>
+
+    <script src="/js/script.js"></script>
+</body>
+
+</html>
