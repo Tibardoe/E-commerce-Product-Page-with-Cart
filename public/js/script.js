@@ -25,3 +25,20 @@ async function cartNotification(event, buttonElement) {
         console.error("Error updating cart:", error);
     }
 };
+
+async function handleQuantity(element) {
+    const isMinus = element.classList.contains("minus");
+    const isPlus = element.classList.contains("plus");
+    const numberOfItems = element.parentElement.querySelector(".act-quantity");
+
+    let currentContent = parseInt(numberOfItems.textContent);
+
+    if (isMinus && currentContent > 0) {
+        currentContent -= 1;
+    } else if (isPlus) {
+        currentContent += 1;
+    }
+
+    numberOfItems.textContent = currentContent;
+
+}

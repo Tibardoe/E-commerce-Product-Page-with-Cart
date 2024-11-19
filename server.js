@@ -54,9 +54,56 @@ app.get("/product-details/:id", async (req, res) => {
 app.post("/add-item/:id", async (req, res) => {
     const productId = parseInt(req.params.id);
     const { cartCount } = req.body;
-    console.log(cartCount);
 
 
+    if (isNaN(cartCount) || cartCount <= 0) {
+        return res.status(400).json({ success: false, message: "Invalid cart count" });
+    }
+
+    try {
+        const productIncart = await db.query(
+            "SELECT product_id, quantity, total_cost::numeric AS total_cost FROM cart WHERE product_id = $1",
+            [productId]
+        );
+        if (productIncart.rows.length > 0) {
+            const newQuantity = productIncart.rows[0].quantity + cartCount;
+            const newTotalCost = newQuantity * productIncart.rows[0].total_cost / productIncart.rows[0].quantity;
+
+            await db.query("UPDATE cart SET quantity = $1, total_cost = $2 WHERE product_id = $3", [newQuantity, newTotalCost, productId]);
+        } else {
+            const product = await db.query("SELECT price::numeric AS price from product_listing WHERE id = $1", [productId]);
+
+            if (product.rows.length === 0) {
+                return res.status(404).send("Product not found");
+            }
+
+            const price = product.rows[0].price;
+            const totalCost = price * cartCount;
+
+            await db.query("INSERT INTO cart (product_id, quantity, total_cost) VALUES ($1, $2, $3)", [productId, cartCount, totalCost]);
+
+            res.status(200).json({ success: true, message: "Item added to cart" });
+        };
+
+
+    } catch (error) {
+        console.error(`Error adding to cart: ${error}`);
+        res.status(500).send("Internal Server Error");
+    }
+
+});
+
+app.get("/cart", async (req, res) => {
+    const response = await db.query(
+        "SELECT cart.id AS cart_id, product_listing.product_name, cart.quantity, cart.total_cost, SUM(cart.total_cost) OVER() AS total_sum FROM cart JOIN product_listing ON cart.product_id = product_listing.id"
+    );
+
+    const result = response.rows;
+
+    res.render("cart.ejs", {
+        cart: result,
+        totalCost: result[0]?.total_sum || 0
+    });
 });
 
 app.listen(port, () => {
